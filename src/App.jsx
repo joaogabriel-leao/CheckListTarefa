@@ -10,8 +10,7 @@ import { IconPlus, IconSchool } from "./components/icons";
 import { SubHeading } from "./components/SubHeading";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDoList } from "./components/ToDoList";
-import { TextInput } from "./components/TextInput";
-import { Button } from "./components/Button";
+import { Formulario } from "./components/Formulario";
 
 const todos = [
   {
@@ -59,8 +58,11 @@ function App() {
 
   const alternarModal = () => {
     setShowDialog(!showDialog);
-    console.log("Alternando modal");
   };
+
+  const addTask = () => {
+    alternarModal();
+  }
 
   return (
     <main>
@@ -85,12 +87,7 @@ function App() {
           </ToDoList>
           <Footer>
             <Dialog isOpen={showDialog} onClose={alternarModal}>
-              <form>
-                <TextInput placeholder="Digite a tarefa que você quer adcionar" />
-              </form>
-              <Button >
-                Salvar
-              </Button>
+              <Formulario onSubmit={addTask}/>
             </Dialog>
             <FabButton onClick={alternarModal}>
               <IconPlus />

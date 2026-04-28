@@ -1,8 +1,8 @@
 import './button-add-task.css'
 
-export function Button( {children} ) {
+export function Button( {children , ...rest} ) {
     return(
-        <button className="salvar-alteracao-button">
+        <button {...rest} className="salvar-alteracao-button">
             {children}
         </button>
     )
