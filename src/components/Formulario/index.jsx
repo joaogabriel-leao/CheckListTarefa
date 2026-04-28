@@ -5,6 +5,7 @@ export function Formulario({ onSubmit }) {
   return (
     <form action={onSubmit}>
       <TextInput
+        name="description"
         required
         placeholder="Digite a tarefa que você quer adcionar"
         // required
