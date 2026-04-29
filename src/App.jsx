@@ -14,52 +14,9 @@ import { Formulario } from "./components/Formulario";
 
 function App() {
   const [showDialog, setShowDialog] = useState(false);
-  const [tarefa, setTarefa] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Controle de inputs e formulários controlados",
-      completed: true,
-      createdAt: "2022-10-31",
-    },
-  ]);
 
   const alternarModal = () => {
     setShowDialog(!showDialog);
-  };
-
-  const addTask = (formData) => {
-    const description = formData.get("description");
-    setTarefa((tarefasAnteriores) => {
-      const toDo = {
-        id: tarefasAnteriores.length + 1,
-        description: description,
-        completed: false,
-        createdAt: new Date().toISOString(),
-      };
-      return [...tarefasAnteriores, toDo];
-    });
-    console.log(tarefa);
-    alternarModal();
-  };
-
-  const toggleToDoCompleted = (todo) => {
-    setTarefa((prevState) => {
-      return prevState.map((t) => {
-        if (t.id === todo.id) {
-          return {
-            ...t,
-            completed: !t.completed,
-          };
-        }
-        return t;
-      });
-    });
   };
 
   return (
@@ -72,7 +29,7 @@ function App() {
         </Header>
         <ChecklistsWrapper>
           <SubHeading>Para estudar</SubHeading>
-          <ToDoList>
+          {/* <ToDoList>
             {tarefa
               .filter((t) => !t.completed)
               .map(function (t) {
@@ -80,13 +37,14 @@ function App() {
                   <ToDoItem
                     key={t.id}
                     item={t}
+                    excluirTask={excluirTask}
                     onToggleCompleted={toggleToDoCompleted}
                   />
                 );
               })}
-          </ToDoList>
+          </ToDoList> */}
           <SubHeading>Concluído</SubHeading>
-          <ToDoList>
+          {/* <ToDoList>
             {tarefa
               .filter((t) => t.completed)
               .map(function (t) {
@@ -94,14 +52,15 @@ function App() {
                   <ToDoItem
                     key={t.id}
                     item={t}
+                    excluirTask={excluirTask}
                     onToggleCompleted={toggleToDoCompleted}
                   />
                 );
               })}
-          </ToDoList>
+          </ToDoList> */}
           <Footer>
             <Dialog isOpen={showDialog} onClose={alternarModal}>
-              <Formulario onSubmit={addTask} />
+              {/* <Formulario onSubmit={addTask} /> */}
             </Dialog>
             <FabButton onClick={alternarModal}>
               <IconPlus />
