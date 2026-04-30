@@ -1,21 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToDoContext from "./ToDoContext";
 
 export default function ToDoProvider({ children }) {
-  const [tarefa, setTarefa] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Controle de inputs e formulários controlados",
-      completed: true,
-      createdAt: "2022-10-31",
-    },
-  ]);
+
+  const savedToDo = localStorage.getItem('tarefa')
+
+  const [tarefa, setTarefa] = useState(savedToDo ? JSON.parse(savedToDo) : []);
+
+  useEffect(() => {
+      localStorage.setItem('tarefa', JSON.stringify(tarefa))
+  }, [tarefa])
 
 
   const addTask = (formData) => {
@@ -52,7 +46,7 @@ export default function ToDoProvider({ children }) {
         return t.id !== todo.id;
       });
     });
-  };
+  }; 
 
   return <ToDoContext
     value = {{
