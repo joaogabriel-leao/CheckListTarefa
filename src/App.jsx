@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper";
 import { Container } from "./components/Container";
 import Dialog from "./components/Dialog";
@@ -11,12 +11,21 @@ import { SubHeading } from "./components/SubHeading";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDoList } from "./components/ToDoList";
 import { Formulario } from "./components/Formulario";
+import ToDoContext from "./components/ToDoProvider/ToDoContext";
+import ToDoProvider from "./components/ToDoProvider";
+import ToDoGroup from "./components/ToDoGroup";
 
 function App() {
   const [showDialog, setShowDialog] = useState(false);
+  const { tarefa, addTask } = use(ToDoContext);
 
   const alternarModal = () => {
     setShowDialog(!showDialog);
+  };
+
+  const handleFormularioSubmit = (formData) => {
+    addTask(formData);
+    alternarModal();
   };
 
   return (
@@ -28,39 +37,18 @@ function App() {
           </Heading>
         </Header>
         <ChecklistsWrapper>
-          <SubHeading>Para estudar</SubHeading>
-          {/* <ToDoList>
-            {tarefa
-              .filter((t) => !t.completed)
-              .map(function (t) {
-                return (
-                  <ToDoItem
-                    key={t.id}
-                    item={t}
-                    excluirTask={excluirTask}
-                    onToggleCompleted={toggleToDoCompleted}
-                  />
-                );
-              })}
-          </ToDoList> */}
-          <SubHeading>Concluído</SubHeading>
-          {/* <ToDoList>
-            {tarefa
-              .filter((t) => t.completed)
-              .map(function (t) {
-                return (
-                  <ToDoItem
-                    key={t.id}
-                    item={t}
-                    excluirTask={excluirTask}
-                    onToggleCompleted={toggleToDoCompleted}
-                  />
-                );
-              })}
-          </ToDoList> */}
+          <ToDoGroup
+            heading="Para estudar"
+            items={tarefa.filter((t) => !t.completed)}
+          />
+
+          <ToDoGroup
+            heading="Concluído"
+            items={tarefa.filter((t) => t.completed)}
+          />
           <Footer>
             <Dialog isOpen={showDialog} onClose={alternarModal}>
-              {/* <Formulario onSubmit={addTask} /> */}
+              <Formulario onSubmit={handleFormularioSubmit} />
             </Dialog>
             <FabButton onClick={alternarModal}>
               <IconPlus />
