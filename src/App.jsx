@@ -21,7 +21,7 @@ function App() {
 
   const alternarModal = () => {
     setShowDialog(!showDialog);
-  }; 
+  };
 
   const handleFormularioSubmit = (formData) => {
     addTask(formData);
