@@ -5,7 +5,7 @@ import ToDoContext from "../ToDoProvider/ToDoContext";
 
 export function ToDoItem( {item} ) {
   const styles = ["todo-item"];
-  const { toggleToDoCompleted, excluirTask } = use(ToDoContext);
+  const { toggleToDoCompleted, excluirTask , openFormEdit } = use(ToDoContext);
 
   if (item.completed) {
     styles.push("completed");
@@ -28,7 +28,10 @@ export function ToDoItem( {item} ) {
           <button onClick={() => excluirTask(item)} className="btn">
             <IconTrash />
           </button>
-          <button className="btn">
+          <button 
+          className="btn"
+          onClick={() => openFormEdit(item)}
+          >
             <IconPencil />
           </button>
         </div>

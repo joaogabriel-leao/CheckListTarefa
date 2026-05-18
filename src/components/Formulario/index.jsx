@@ -1,14 +1,14 @@
 import { Button } from "../Button";
 import { TextInput } from "../TextInput";
 import "./formulario.css";
-export function Formulario({ onSubmit }) {
+export function Formulario({ onSubmit , defaultValue}) {
   return (
     <form action={onSubmit}>
       <TextInput
         name="description"
         required
         placeholder="Digite a tarefa que você quer adcionar"
-        // required
+        defaultValue={defaultValue}
       />
       <Button type="submit">Salvar item</Button>
     </form>

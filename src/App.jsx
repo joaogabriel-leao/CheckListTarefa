@@ -16,16 +16,12 @@ import ToDoProvider from "./components/ToDoProvider";
 import ToDoGroup from "./components/ToDoGroup";
 
 function App() {
-  const [showDialog, setShowDialog] = useState(false);
-  const { tarefa, addTask } = use(ToDoContext);
 
-  const alternarModal = () => {
-    setShowDialog(!showDialog);
-  };
+  const { tarefa, addTask, showDialog , openFormToDoDialg , closeFormToDoDialg , selectedToDo } = use(ToDoContext);
 
   const handleFormularioSubmit = (formData) => {
     addTask(formData);
-    alternarModal();
+    closeFormToDoDialg();
   };
 
   return (
@@ -47,10 +43,13 @@ function App() {
             items={tarefa.filter((t) => t.completed)}
           />
           <Footer>
-            <Dialog isOpen={showDialog} onClose={alternarModal}>
-              <Formulario onSubmit={handleFormularioSubmit} />
+            <Dialog isOpen={showDialog} onClose={closeFormToDoDialg}>
+              <Formulario 
+              onSubmit={handleFormularioSubmit} 
+              defaultValue={selectedToDo?.description}
+              />
             </Dialog>
-            <FabButton onClick={alternarModal}>
+            <FabButton onClick={openFormToDoDialg}>
               <IconPlus />
             </FabButton>
           </Footer>

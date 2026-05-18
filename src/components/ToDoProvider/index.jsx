@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToDoContext from "./ToDoContext";
 
 export default function ToDoProvider({ children }) {
-  const [tarefa, setTarefa] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Controle de inputs e formulários controlados",
-      completed: true,
-      createdAt: "2022-10-31",
-    },
-  ]);
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedToDo, setSelectToDo] = useState();
 
+  const savedToDo = localStorage.getItem("tarefas")
+  const [tarefa , setTarefa] = useState(savedToDo ? JSON.parse(savedToDo) : [])
+  
+  useEffect(() => {
+    localStorage.setItem("tarefas", JSON.stringify(tarefa));
+  }, [tarefa]);
+
+  const openFormToDoDialg = (todo) => {
+    if (todo) {
+      setSelectToDo(todo);
+    }
+    setShowDialog(true);
+  };
+
+  const closeFormToDoDialg = () => {
+    setShowDialog(false);
+    setSelectToDo(null);
+  };
 
   const addTask = (formData) => {
     const description = formData.get("description");
@@ -54,12 +60,26 @@ export default function ToDoProvider({ children }) {
     });
   };
 
-  return <ToDoContext
-    value = {{
+  const openFormEdit = (todo) => {
+    openFormToDoDialg(todo);
+  };
+
+  return (
+    <ToDoContext
+      value={{
         tarefa,
         addTask,
         toggleToDoCompleted,
-        excluirTask
-    }}
-  > {children} </ToDoContext>;
+        excluirTask,
+        showDialog,
+        openFormToDoDialg,
+        closeFormToDoDialg,
+        openFormEdit,
+        selectedToDo,
+      }}
+    >
+      {" "}
+      {children}{" "}
+    </ToDoContext>
+  );
 }
