@@ -64,6 +64,20 @@ export default function ToDoProvider({ children }) {
     openFormToDoDialg(todo);
   };
 
+  const editToDo = (formData) => {
+    setTarefa((prevState) => {
+      return prevState.map((t) => {
+        if (t.id === selectedToDo.id) {
+          return {
+            ...t,
+            description: formData.get("description"),
+          };
+        }
+        return t;
+      });
+    });
+  }
+
   return (
     <ToDoContext
       value={{
@@ -76,6 +90,7 @@ export default function ToDoProvider({ children }) {
         closeFormToDoDialg,
         openFormEdit,
         selectedToDo,
+        editToDo
       }}
     >
       {" "}

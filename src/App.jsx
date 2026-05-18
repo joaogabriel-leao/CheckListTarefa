@@ -14,13 +14,25 @@ import { Formulario } from "./components/Formulario";
 import ToDoContext from "./components/ToDoProvider/ToDoContext";
 import ToDoProvider from "./components/ToDoProvider";
 import ToDoGroup from "./components/ToDoGroup";
+import EmptyState from "./components/EmptyState";
 
 function App() {
-
-  const { tarefa, addTask, showDialog , openFormToDoDialg , closeFormToDoDialg , selectedToDo } = use(ToDoContext);
+  const {
+    tarefa,
+    addTask,
+    showDialog,
+    openFormToDoDialg,
+    closeFormToDoDialg,
+    selectedToDo,
+    editToDo
+  } = use(ToDoContext);
 
   const handleFormularioSubmit = (formData) => {
-    addTask(formData);
+    if (selectedToDo) {
+      editToDo(formData);
+    } else {
+      addTask(formData);
+    }
     closeFormToDoDialg();
   };
 
@@ -37,19 +49,19 @@ function App() {
             heading="Para estudar"
             items={tarefa.filter((t) => !t.completed)}
           />
-
+        {tarefa.length == 0 && <EmptyState/> }
           <ToDoGroup
             heading="Concluído"
             items={tarefa.filter((t) => t.completed)}
           />
           <Footer>
             <Dialog isOpen={showDialog} onClose={closeFormToDoDialg}>
-              <Formulario 
-              onSubmit={handleFormularioSubmit} 
-              defaultValue={selectedToDo?.description}
+              <Formulario
+                onSubmit={handleFormularioSubmit}
+                defaultValue={selectedToDo?.description}
               />
             </Dialog>
-            <FabButton onClick={openFormToDoDialg}>
+            <FabButton onClick={() => openFormToDoDialg()}>
               <IconPlus />
             </FabButton>
           </Footer>
