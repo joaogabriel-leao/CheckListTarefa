@@ -1,58 +1,75 @@
 ![](thumbnail.png)
 
-# App de Checklist de Estudos
+# ✅ Checklist de Estudos
 
-Um projeto prático desenvolvido passo a passo para quem já tem o básico de ReactJS e quer evoluir para construir aplicações mais organizadas, escaláveis e com experiência moderna. Ao longo do curso, criamos um app de checklist para organizar estudos, tarefas e o que mais precisar.
-
-## 🔨 Funcionalidades do projeto
-
-* Adição, edição e exclusão de tarefas
-* Organização das tarefas em "Para estudar" e "Concluído"
-* Marcação de tarefas como concluídas
-* Feedback visual para lista vazia (empty state)
-* Modal para adicionar/editar tarefas
-* Lista animada de tarefas
+App de checklist para organizar tarefas de estudo, desenvolvido com React 19 e Vite.
 
 ![](screen-capture.png)
 
-## ✔️ Técnicas e tecnologias utilizadas
+## 🔨 Funcionalidades
 
-O desenvolvimento do projeto aborda as seguintes técnicas e tecnologias:
+- Adicionar, editar e excluir tarefas
+- Marcar tarefas como concluídas
+- Organização em grupos: "Para estudar" e "Concluído"
+- Persistência local com localStorage
+- Modal (Dialog) para formulário de tarefas
+- Empty state quando não há tarefas
+- Botão flutuante (FAB) para adicionar novas tarefas
 
-* **useState e useEffect**: Gerenciamento de estado e persistência no localStorage
-* **useContext**: Contexto global para compartilhar estado das tarefas
-* **Componentização**: Componentes reutilizáveis como Button, FabButton, Dialog, TodoForm, TodoItem e TodoGroup
-* **Estilização com CSS Modules**: Organização dos estilos por componente
-* **Manipulação de formulários controlados**
-* **Persistência local com localStorage**: Salva as tarefas mesmo fechando o app
-* **Ícones SVG personalizados**
-* **Boas práticas de organização de código**
+## 🛠️ Tecnologias
 
-## 🛠️ Como rodar o projeto
+- **React 19** com hooks (`useState`, `useEffect`, `use`)
+- **Context API** para gerenciamento de estado global (`ToDoProvider`)
+- **Vite 6** como bundler
+- **CSS Modules** para estilização por componente
+- **ESLint** para linting
 
-Após baixar o projeto, siga os passos abaixo para executar localmente:
+## 📁 Estrutura de Componentes
 
-1. Certifique-se de que você já tem Node.js instalado ([guia oficial](https://nodejs.org/en/download/)).
-2. No terminal, navegue até a pasta do projeto e instale as dependências:
-
-```bash
-npm install
+```
+src/
+├── App.jsx
+├── main.jsx
+├── index.css
+└── components/
+    ├── Button/
+    ├── ChecklistsWrapper/
+    ├── Container/
+    ├── Dialog/
+    ├── EmptyState/
+    ├── FabButton/
+    ├── Footer/
+    ├── Formulario/
+    ├── Header/
+    ├── Heading/
+    ├── SubHeading/
+    ├── TextInput/
+    ├── ToDoGroup/
+    ├── ToDoItem/
+    ├── ToDoList/
+    ├── ToDoProvider/
+    └── icons/
 ```
 
-3. Execute o projeto:
+## 🚀 Como rodar
+
+Pré-requisito: [Node.js](https://nodejs.org/) >= 22
 
 ```bash
+# Instalar dependências
+npm install
+
+# Rodar em desenvolvimento
 npm run dev
 ```
 
-4. Acesse no navegador: [http://localhost:5173](http://localhost:5173) (Vite).
+Acesse: [http://localhost:5173](http://localhost:5173)
 
-## 📚 Mais informações do curso
+## 📦 Scripts disponíveis
 
-Curtiu o projeto e quer aprender na prática? O passo a passo completo faz parte do segundo ccurso da carreira React da Alura, com foco em experiência real de desenvolvimento, boas práticas e refatoração progressiva.
-
-Se quiser experimentar, explore o código e customize o checklist do seu jeito!
-
----
-
-Vida longa e próspera 🚀
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera o build de produção |
+| `npm run preview` | Pré-visualiza o build de produção |
+| `npm run lint` | Executa o ESLint |
